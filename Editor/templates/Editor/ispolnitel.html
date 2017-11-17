@@ -1,0 +1,10 @@
+<br>simple list iteration
+{% if list %}
+    <ul>
+    {% for item in list %}
+        <li><a href="{% url 'detail' akt.id %}">{{ item.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

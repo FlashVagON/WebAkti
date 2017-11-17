@@ -1,0 +1,10 @@
+<br>qweqweqwe
+{% if list %}
+    <ul>
+    {% for akt in list %}
+        <li><a href="{% url 'detail' akt.id %}">{{ akt.regnum }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

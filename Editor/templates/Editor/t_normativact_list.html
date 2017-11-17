@@ -1,0 +1,11 @@
+ {% for card in object_list %}
+ {{card}}
+        <p>{{ card.regdate }}</p>
+        <h2><a href="{{card.get_absolute_url }}">{{ card.regnum }}</a></h2>
+		{{ card.topic }}
+        <p>{{ card.obrash_text }}</p>
+        <a href="{{card.get_edit_url }}">редактировать</a>
+    {% empty %}
+    <p>Нет постов</p>
+    {% endfor %}
+	{{ object_list }}
