@@ -1,8 +1,8 @@
-<br>тут текст
+<br>Список актов
 {% if list %}
     <ul>
     {% for akt in list %}
-        <li><a href="{% url 'detail' akt.id %}">{{ akt.regnum }}</a></li>
+        <li><a href="{% url 'detail' akt.id %}">{{ akt.regnum }}</a> <a href="{% url 'edit_act' akt.id %}">Редактировать</a> </li>
     {% endfor %}
     </ul>
 {% else %}

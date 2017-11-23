@@ -33,15 +33,22 @@ class PostDetailView(DetailView):  # детализированное предс
     model = T_NormativAct
 
 
-def addact(request):
+def addact(request,akt_id=None):
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES)
         logger.error('posting ' + str(request.user.is_authenticated))
         if form.is_valid() and request.user.is_authenticated:  # only authenticated users can post
-            post = form.save()
+            post = form.save(commit=False)
+            if akt_id is not None:
+                post.pk = akt_id
+                logger.error('изменение удалось')
+            post.save()
             return redirect('detail', id=post.id)
         logger.error('Что-то не так с загрузкой')
         return render(request, 'Editor/detail.html')
-
-    form = PostForm()
+    if akt_id is None:
+        form = PostForm()
+    else:
+        akt_data=T_NormativAct.objects.get(pk=akt_id)
+        form = PostForm(instance=akt_data)
     return render(request, 'Editor/post_edit.html', {'form': form})
