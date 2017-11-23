@@ -44,7 +44,7 @@ class T_Publicationlocate(models.Model):
     class Meta:
         verbose_name = 'Место опубликования'
 class T_Mainexecutor(models.Model):
-    mainexecutor = models.CharField("Ответственный исполнитель",max_length=200)    
+    mainexecutor = models.CharField("Ответственный исполнитель",max_length=200)
     def __str__(self):
         return self.mainexecutor
     class Meta:
@@ -52,9 +52,9 @@ class T_Mainexecutor(models.Model):
 class T_Signers(models.Model):
     name =  models.CharField("ФИО",max_length=200)
     def __str__(self):
-        return self.name 
+        return self.name
     class Meta:
-        verbose_name = 'Подписывающие'      
+        verbose_name = 'Подписывающие'
 class T_Acceptancers(models.Model):
     name =  models.CharField("ФИО",max_length=200)
     def __str__(self):
@@ -65,14 +65,14 @@ class T_NormativAct(models.Model):
     status = models.ForeignKey(T_Status, on_delete=models.CASCADE)
     doctype = models.ForeignKey(T_Doctype, on_delete=models.CASCADE)
     signing = models.ForeignKey(T_Signing, on_delete=models.CASCADE)
-    regnum = models.CharField("Рег. №",max_length=200)    
+    regnum = models.CharField("Рег. №",max_length=200)
     regdate = models.DateField("Регистрационная дата")
     executor = models.ForeignKey(T_Executor, on_delete=models.CASCADE)
     theme = models.ForeignKey(T_Theme, on_delete=models.CASCADE)
     topic = models.CharField("Заголовок",max_length=2000)
     docsubtype = models.ForeignKey(T_Docsubtype, on_delete=models.CASCADE)
     publicateflag = models.BooleanField("подлежит опубликованию")
-    numofnewspaper = models.CharField("№ газеты",max_length=200)    
+    numofnewspaper = models.CharField("№ газеты",max_length=200)
     publicatedin = models.ForeignKey(T_Publicationlocate, on_delete=models.CASCADE)
     publicatedate = models.DateField("дата публикации")
     mainexecutor = models.ForeignKey(T_Mainexecutor, on_delete=models.CASCADE)
@@ -84,7 +84,7 @@ class T_NormativAct(models.Model):
     archivedelo = models.CharField("Дело №",max_length=200)
     archivetom = models.CharField("Том №",max_length=200)
     sheetscount = models.IntegerField("Листы")
-    file = models.FileField("Файл")
+    file = models.FileField("Файл",upload_to="tmp/")  # , blank=True)
     ageementers = models.ManyToManyField(T_Acceptancers)
     signers = models.ManyToManyField(T_Signers)
     def __str__(self):
