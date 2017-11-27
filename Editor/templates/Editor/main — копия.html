@@ -1,0 +1,12 @@
+<br><p><h2>Список актов</h2></p>
+
+<br><a href="{% url 'create_act'  %}">Создать новую карточку акта</a>
+{% if list %}
+    <ul>
+    {% for akt in list %}
+        <li><a href="{% url 'detail' akt.id %}">{{ akt.regnum }}</a></li> <li><button><a href="{% url 'edit_act' akt.id %}">Редактировать</a></button> </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
