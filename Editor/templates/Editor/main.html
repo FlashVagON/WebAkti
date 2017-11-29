@@ -1,12 +1,47 @@
-<br>Список актов
+{% load staticfiles %}
+<html >
+<head>
+  
+	<meta charset="UTF-8">
+	<title>Акты</title>
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">  
+  
+	<script src="{% static 'js/prefixfree.min.js' %}"></script>
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+    
 
-<br><a href="{% url 'create_act'  %}">Создать новую карточку акта</a>
+</head>
+
+<body>
+
+	<h1>Список актов</h1>
+
+	<br><a class="effect-2" href="{% url 'create_act'  %}">Создать новую карточку акта</a>
 {% if list %}
-    <ul>
-    {% for akt in list %}
-        <li><a href="{% url 'detail' akt.id %}">{{ akt.regnum }}</a> <a href="{% url 'edit_act' akt.id %}">Редактировать</a> </li>
+    <table border="1" align="center" >
+		<caption>Нормативные акты</caption>
+		<tr>
+			<th>Номер акта</th>
+			<th>Тема</th>
+		</tr>
+    {% for akt in list %}        
+		<tr>
+			<td>
+				<a class="effect-1" href="{% url 'detail' akt.id %}">{{ akt.regnum }}</a>
+			</td>
+			<td>
+				{{ akt.theme }}
+			</td>	
+			<td>
+				<div class="btn" data-type="letter_spacing">
+					<a href="{% url 'edit_act' akt.id %}">Редактировать</a>
+				</div>
+			</td>
+		</tr>		
     {% endfor %}
-    </ul>
+    </table>
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
+	<script src="{% static 'js/jquery.easing.min.js' %}"></script>
+</body>
