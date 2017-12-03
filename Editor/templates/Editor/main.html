@@ -16,30 +16,23 @@
 
 	<h1>Список актов</h1>
 
-	<br><a class="effect-2" href="{% url 'create_act'  %}">Создать новую карточку акта</a>
+	<div class="new-akt"><a class="effect-2" href="{% url 'create_act'  %}">Создать новую карточку акта</a></div>
+	
 {% if list %}
-    <table border="1" align="center" >
-		<caption>Нормативные акты</caption>
-		<tr>
-			<th>Номер акта</th>
-			<th>Тема</th>
-		</tr>
+   
     {% for akt in list %}        
-		<tr>
-			<td>
-				<a class="effect-1" href="{% url 'detail' akt.id %}">{{ akt.regnum }}</a>
-			</td>
-			<td>
-				{{ akt.theme }}
-			</td>	
-			<td>
-				<div class="btn" data-type="letter_spacing">
-					<a href="{% url 'edit_act' akt.id %}">Редактировать</a>
-				</div>
-			</td>
-		</tr>		
+		<div class="box">
+			<a class="effect-1" href="{% url 'detail' akt.id %}">{{ akt.regnum }}</a>
+		</div>
+		<div class="box">
+			{{ akt.theme }}
+		</div>
+		<div class="btn" data-type="letter_spacing">
+			<a href="{% url 'edit_act' akt.id %}">Редактировать</a>
+		</div>
+			
     {% endfor %}
-    </table>
+ 
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
