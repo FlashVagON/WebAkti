@@ -2,5 +2,5 @@
     <form  enctype="multipart/form-data" method="POST" class="post-form" action={{ request.path }}>
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Save</button>
+        <button type="submit" class="save btn btn-default">Сохранить</button>
     </form>

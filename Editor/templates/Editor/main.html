@@ -21,6 +21,7 @@
 {% if list %}
    
     {% for akt in list %}        
+		
 		<div class="box">
 			<a class="effect-1" href="{% url 'detail' akt.id %}">{{ akt.regnum }}</a>
 		</div>

@@ -25,7 +25,13 @@ div.box {
 	position: inherit;
 	text-align: center;
 	float: left;
+	padding-left:12px;
 
+}
+
+[href*="post"]{
+	color: rgba(255, 255, 255, 0.9);
+	
 }
 
 div.new-akt {
@@ -35,7 +41,7 @@ div.new-akt {
 }
 
 body {
-  width: 80%;
+  width: 50%;
   margin: 50px auto;
   color: rgba(255, 255, 255, 0.9);
   font: 16px/1 'Open Sans', sans-serif;
@@ -130,7 +136,7 @@ a:before, a:after, a > span:before, a > span:after {
   border: 1px solid #fff;
   overflow: hidden;
   color: #fff;
-  line-height: 80px;
+  line-height: 70px;
   text-transform: capitalize;
   float: left;
   z-index: 1;
