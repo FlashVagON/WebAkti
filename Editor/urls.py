@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^list/$', views.PostsListView.as_view()),
     url(r'^post/$', views.addact, name='create_act'),
     url(r'^post/(?P<akt_id>[0-9]+)/$', views.addact, name='edit_act'),
+
 ]
