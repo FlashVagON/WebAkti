@@ -6,7 +6,9 @@ from .models import T_NormativAct
 from .forms import PostForm
 from django.views.generic import ListView, DetailView
 import logging
+
 logger = logging.getLogger(__name__)
+
 
 def index(request):
     list = T_NormativAct.objects.order_by('id')
@@ -33,7 +35,7 @@ class PostDetailView(DetailView):  # детализированное предс
     model = T_NormativAct
 
 
-def addact(request,akt_id=None):
+def addact(request, akt_id=None):
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES)
         logger.error('posting ' + str(request.user.is_authenticated))
@@ -49,6 +51,6 @@ def addact(request,akt_id=None):
     if akt_id is None:
         form = PostForm()
     else:
-        akt_data=T_NormativAct.objects.get(pk=akt_id)
+        akt_data = T_NormativAct.objects.get(pk=akt_id)
         form = PostForm(instance=akt_data)
     return render(request, 'Editor/post_edit.html', {'form': form})
