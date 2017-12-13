@@ -11,12 +11,18 @@ logger = logging.getLogger(__name__)
 
 
 def index(request):
-    list = T_NormativAct.objects.order_by('id')
+    query=request.GET.get("searchtxt")
+    if query:
+        list = T_NormativAct.objects.filter(regnum__icontains=query).order_by('id')
+    else:
+        logger.error('else')
+        list = T_NormativAct.objects.order_by('id')
     template = loader.get_template('Editor/main.html')
     context = {
         'list': list,
     }
     return HttpResponse(template.render(context, request))
+
 
 
 def detail(request, id):

@@ -13,7 +13,11 @@
 </head>
 
 <body>
-
+поиск
+   <form  method="get"  action={{ request.path }}>
+	   <input type="text" name="searchtxt" >
+        <button type="submit" class="search btn btn-default">Искать</button>
+   </form>
 	<h1>Список актов</h1>
 
 	<div class="new-akt"><a class="effect-2" href="{% url 'create_act'  %}">Создать новую карточку акта</a></div>
