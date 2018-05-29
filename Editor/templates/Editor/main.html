@@ -13,33 +13,67 @@
 </head>
 
 <body>
-поиск
-   <form  method="get"  action={{ request.path }}>
-	   <input type="text" name="searchtxt" >
-        <button type="submit" class="search btn btn-default">Искать</button>
-   </form>
-	<h1>Список актов</h1>
+	<div class="top_search">
+		<p>поиск</p>
+	
+		<form  method="get"  action={{ request.path }}>
+			<input type="text" name="searchtxt" >
+			<button type="submit" class="search btn btn-default">Искать</button>
+		</form>
+		<br>
+		<form  method="get"  action={{ request.path }}>
+			<button type="submit" class="search btn btn-default">Сбросить</button>
+		</form>
+	</div>
+   
+	<br>
+	<p><h1>Список актов</h1></p>
 
 	<div class="new-akt"><a class="effect-2" href="{% url 'create_act'  %}">Создать новую карточку акта</a></div>
+	<br>
 	
 {% if list %}
    
     {% for akt in list %}        
 		
-		<div class="box">
-			<a class="effect-1" href="{% url 'detail' akt.id %}">{{ akt.regnum }}</a>
-		</div>
-		<div class="box">
-			{{ akt.theme }}
-		</div>
-		<div class="btn" data-type="letter_spacing">
-			<a href="{% url 'edit_act' akt.id %}">Редактировать</a>
-		</div>
+		<div>
+			<div class="box">
+				<a class="effect-1" href="{% url 'detail' akt.id %}">{{ akt.regnum }}</a>
+			</div>
+			<div class="box">
+				{{ akt.theme }}
+			</div>
+			<div class="btn" data-type="letter_spacing">
+				<a href="{% url 'edit_act' akt.id %}">Редактировать</a>
+			</div>
+		</div>	
 			
     {% endfor %}
- 
+<!-- 	{% for all_akt in all_akts %}
+    {# Each "all_akt" is a T_NormativAct model object. #}
+    {{ all_akt.full_name|upper }}<br />
+    ...
+	{% endfor %} -->
+
+	<div class="pagination">
+		<span class="step-links">
+			{% if all_akts.has_previous %}
+				<a href="?page={{ all_akts.previous_page_number }}">previous</a>
+			{% endif %}
+
+			<span class="current">
+				Страница {{ all_akts.number }} из {{ all_akts.paginator.num_pages }}.
+			</span>
+
+			{% if all_akts.has_next %}
+				<a href="?page={{ all_akts.next_page_number }}">next</a>
+			{% endif %}
+		</span>
+	</div>
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
+
+
 	<script src="{% static 'js/jquery.easing.min.js' %}"></script>
 </body>
