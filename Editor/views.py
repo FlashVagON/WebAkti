@@ -11,18 +11,18 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def index(request):
-    query=request.GET.get("searchtxt")
-    if query:
-        list = T_NormativAct.objects.filter(regnum__icontains=query).order_by('id')
-    else:
-        logger.error('else')
-        list = T_NormativAct.objects.order_by('id')
-    template = loader.get_template('Editor/main.html')
-    context = {
-        'list': list,
-    }
-    return HttpResponse(template.render(context, request))
+# def index(request):
+    # query=request.GET.get("searchtxt")
+    # if query:
+        # list = T_NormativAct.objects.filter(regnum__icontains=query).order_by('id')
+    # else:
+        # logger.error('else')
+        # list = T_NormativAct.objects.order_by('id')
+    # template = loader.get_template('Editor/main.html')
+    # context = {
+        # 'list': list,
+    # }
+    # return HttpResponse(template.render(context, request))
 
 
 
@@ -32,16 +32,27 @@ def detail(request, id):
 		raise Http404("акт does not	exist") 
 	return render(request, 'Editor/detail.html', {'akt': akt})
 	
-def listing(request, all_akts):							#https://djbook.ru/rel1.9/topics/pagination.html
-	akts_count = T_NormativAct.objects.all() #общее количество актов
-	paginator = Paginator(akts_count, 5)  # Показывать по 5 актов на странице
-	page = request.GET.get('page')
-	try: all_akts = paginator.page(page)
-	except PageNotAnInteger:  # If page is not an integer, deliver first page.
-		all_akts = paginator.page(1) 
-	except EmptyPage:  # If page is out of range (e.g. 9999), deliver last page of results. 
-		all_akts = paginator.page(paginator.num_pages)
-	return render_to_response(request, 'Editor/detail.html', {'all_akts':all_akts})
+def listing(request):  
+    query=request.GET.get("searchtxt")
+    if query:
+        list = T_NormativAct.objects.filter(regnum__icontains=query).order_by('id')
+    else:
+        logger.error('else')
+        list = T_NormativAct.objects.order_by('id')                          #https://djbook.ru/rel1.9/topics/pagination.html
+    akts_count = list#T_NormativAct.objects.all() #общее количество актов
+    paginator = Paginator(akts_count, 5)  # Показывать по 5 актов на странице
+    page = request.GET.get('page')
+    try: all_akts = paginator.page(page)
+    except PageNotAnInteger:  # If page is not an integer, deliver first page.
+        all_akts = paginator.page(1) 
+    except EmptyPage:  # If page is out of range (e.g. 9999), deliver last page of results. 
+        all_akts = paginator.page(paginator.num_pages)
+    template = loader.get_template('Editor/main.html')
+    context = {
+        'all_akts':all_akts,
+        'list': all_akts,
+    }
+    return HttpResponse(template.render(context, request))
 
 class PostsListView(ListView):  # представление в виде списка
     model = T_NormativAct  # модель для представления
