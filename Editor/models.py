@@ -125,7 +125,7 @@ class T_NormativAct(models.Model):
     archivedelo = models.CharField("Дело №", max_length=200)
     archivetom = models.CharField("Том №", max_length=200)
     sheetscount = models.IntegerField("Листы")
-    file = models.FileField("Файл", upload_to="tmp/", blank=True)
+    file = models.FileField("Файл", upload_to="tmp/", blank=True, null=True)
     ageementers = models.ManyToManyField(T_Acceptancers, verbose_name="Утверждено")
     signers = models.ManyToManyField(T_Signers, verbose_name="Подписано")
     def __str__(self):

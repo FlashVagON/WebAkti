@@ -11,27 +11,27 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-# def index(request):
-    # query=request.GET.get("searchtxt")
-    # if query:
-        # list = T_NormativAct.objects.filter(regnum__icontains=query).order_by('id')
-    # else:
-        # logger.error('else')
-        # list = T_NormativAct.objects.order_by('id')
-    # template = loader.get_template('Editor/main.html')
-    # context = {
-        # 'list': list,
-    # }
-    # return HttpResponse(template.render(context, request))
+def index(request):#delete that function
+    query=request.GET.get("searchtxt")
+    if query:
+        list = T_NormativAct.objects.filter(regnum__icontains=query).order_by('id')
+    else:
+        logger.error('else')
+        list = T_NormativAct.objects.order_by('id')
+    template = loader.get_template('Editor/main.html')
+    context = {
+        'list': list,
+    }
+    return HttpResponse(template.render(context, request))
 
 
 
 def detail(request, id):
-	try: akt = T_NormativAct.objects.get(pk=id)
-	except T_NormativAct.DoesNotExist:
-		raise Http404("акт does not	exist") 
-	return render(request, 'Editor/detail.html', {'akt': akt})
-	
+    try: akt = T_NormativAct.objects.get(pk=id)
+    except T_NormativAct.DoesNotExist:
+        raise Http404("акт does not    exist") 
+    return render(request, 'Editor/detail.html', {'akt': akt})
+    
 def listing(request):  
     query=request.GET.get("searchtxt")
     if query:
@@ -53,6 +53,7 @@ def listing(request):
         'list': all_akts,
     }
     return HttpResponse(template.render(context, request))
+    #return render_to_response(request, 'Editor/main.html', {'all_akts':all_akts,})
 
 class PostsListView(ListView):  # представление в виде списка
     model = T_NormativAct  # модель для представления

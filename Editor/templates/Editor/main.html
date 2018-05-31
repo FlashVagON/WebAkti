@@ -48,7 +48,9 @@
 			</div>
 		</div>	
 			
-    {% endfor %}
+    {% endfor %}{% else %}
+    <p>No polls are available.</p>
+{% endif %}
 <!-- 	{% for all_akt in all_akts %}
     {# Each "all_akt" is a T_NormativAct model object. #}
     {{ all_akt.full_name|upper }}<br />
@@ -70,9 +72,7 @@
 			{% endif %}
 		</span>
 	</div>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+
 
 
 	<script src="{% static 'js/jquery.easing.min.js' %}"></script>

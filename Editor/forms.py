@@ -7,9 +7,9 @@ from django.forms.extras.widgets import SelectDateWidget
 
 
 class PostForm(forms.ModelForm):
-    regdate = forms.DateField(label="Регистрационная дата", widget=SelectDateWidget())
-    publicatedate = forms.DateField(label="Дата публикации", widget=SelectDateWidget())
-    controldate = forms.DateField(label="Дата контроля", widget=SelectDateWidget())
+    regdate = forms.DateField(label="Регистрационная дата",input_formats=['%d.%m.%Y'], widget=forms.DateInput(format = '%d.%m.%Y',attrs={'class':'selDate','placeholder':'Выберите дату'}))
+    publicatedate = forms.DateField(label="Дата публикации", input_formats=['%d.%m.%Y'], widget=forms.DateInput(format = '%d.%m.%Y',attrs={'class':'selDate','placeholder':'Выберите дату'}))
+    controldate = forms.DateField(label="Дата контроля",input_formats=['%d.%m.%Y'], widget=forms.DateInput(format = '%d.%m.%Y',attrs={'class':'selDate','placeholder':'Select a date'}))
 
     class Meta:
         model = T_NormativAct

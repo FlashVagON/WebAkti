@@ -1,18 +1,18 @@
-<head> <link rel="stylesheet" type="text/css" href="/admin/media/css/base.css" />
-  <link rel="stylesheet" type="text/css" href="/admin/media/css/forms.css" />
-  <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="/admin/media/css/ie.css" /><![endif]-->
-	<link rel="shortcut icon" href="/pics/favicon.png"/>
-
-  <script type="text/javascript">window.__admin_media_prefix__ = "/admin/media/";</script>
-
-  <script type="text/javascript" src="/admin/jsi18n/"></script>
-  <script type="text/javascript" src="/admin/media/js/core.js"></script>
-
-  <script type="text/javascript" src="/admin/media/js/admin/RelatedObjectLookups.js"></script>
-  <script type="text/javascript" src="/admin/media/js/jquery.min.js"></script>
-  <script type="text/javascript" src="/admin/media/js/jquery.init.js"></script>
-  <script type="text/javascript" src="/admin/media/js/actions.min.js"></script></head>
-    <h1>Создание\редактирование карточки акта {{form.akt_id }}</h1>
+<html lang='ru'>
+<head>
+<link rel="shortcut icon" href="/pics/favicon.png"/>
+{% load static %}
+<link rel="stylesheet" href={% static "css/jquery-ui.css" %}>
+  <script src={% static "js/jquery-1.12.4.js" %}></script>
+  <script src={% static "js/jquery-ui.js" %}></script>
+  <script src={% static "js/datepicker-ru.js" %}></script>
+  <script>
+  $( function() {
+    $( ".selDate" ).datepicker();
+  } );
+  </script>
+</head> 
+<h1>Создание\редактирование карточки акта {{form.akt_id }}</h1>
     <form  enctype="multipart/form-data" method="POST" class="post-form" action={{ request.path }}>
         {% csrf_token %}
         {{ form.as_p }}

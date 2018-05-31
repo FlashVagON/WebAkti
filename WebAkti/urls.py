@@ -20,7 +20,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from WebAkti import settings
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^editor/', include('Editor.urls')),
+    url(r'^', include('Editor.urls')),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

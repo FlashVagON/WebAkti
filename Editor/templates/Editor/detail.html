@@ -20,4 +20,8 @@
 <br>Дело №:{{akt.archivedelo}}
 <br>Том №:{{akt.archivetom}} 
 <br>Листы:{{akt.sheetscount}}
+{% if akt.file %}
 <br>Файл:<a href="{{akt.file.url}}">{{akt.file}}</a>
+{%else%}
+<br>Файл отсутствует
+{% endif %}
